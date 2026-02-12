@@ -24,16 +24,13 @@
     --radius: 12px;
     --radius-sm: 8px;
   }
-
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
   body {
     font-family: 'DM Sans', sans-serif;
     background: var(--bg);
     color: var(--text);
     min-height: 100vh;
   }
-
   body::before {
     content: '';
     position: fixed;
@@ -45,16 +42,10 @@
     pointer-events: none;
     z-index: 0;
   }
-
   .app {
-    position: relative;
-    z-index: 1;
-    max-width: 1060px;
-    margin: 0 auto;
-    padding: 40px 24px 80px;
+    position: relative; z-index: 1; max-width: 1060px;
+    margin: 0 auto; padding: 40px 24px 80px;
   }
-
-  /* Header */
   .header { text-align: center; margin-bottom: 48px; }
   .logo-mark { display: inline-flex; align-items: center; gap: 10px; margin-bottom: 16px; }
   .logo-mark svg { width: 36px; height: 36px; }
@@ -65,7 +56,7 @@
   }
   .tagline { color: var(--text-dim); font-size: 15px; }
 
-  /* Input Section */
+  /* Input */
   .input-section {
     background: var(--surface); border: 1px solid var(--border);
     border-radius: var(--radius); padding: 28px; margin-bottom: 20px;
@@ -81,10 +72,8 @@
   }
   .tab.active { background: var(--surface-2); color: var(--text); }
   .tab:hover:not(.active) { color: var(--text); }
-
   .single-input { display: flex; gap: 10px; }
   .single-input input { flex: 1; }
-
   input, textarea {
     width: 100%; font-family: 'Space Mono', monospace; font-size: 13px; padding: 14px 16px;
     background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-sm);
@@ -127,21 +116,28 @@
   }
   @keyframes loadSlide { 0% { transform: translateX(-100%); } 100% { transform: translateX(400%); } }
 
+  /* Proxy status */
+  .proxy-status {
+    font-size: 11px; color: var(--text-dim); text-align: center; margin-bottom: 16px;
+    font-family: 'Space Mono', monospace;
+  }
+  .proxy-status .proxy-ok { color: var(--accent); }
+  .proxy-status .proxy-fail { color: var(--red); }
+
   /* Site Groups */
   .site-group { margin-bottom: 36px; animation: groupIn 0.4s ease both; }
-  @keyframes groupIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
-
+  @keyframes groupIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; } }
   .site-group-header {
     display: flex; align-items: center; gap: 10px; margin-bottom: 14px;
     padding-bottom: 10px; border-bottom: 1px solid var(--border);
   }
   .sg-favicon { width: 20px; height: 20px; border-radius: 4px; }
-  .sg-domain { font-family: 'Space Mono', monospace; font-size: 14px; font-weight: 700; color: var(--text); }
+  .sg-domain { font-family: 'Space Mono', monospace; font-size: 14px; font-weight: 700; }
   .sg-status { font-size: 11px; margin-left: auto; font-weight: 600; }
   .sg-status.scanning { color: var(--yellow); }
   .sg-status.done { color: var(--accent); }
   .sg-status.error { color: var(--red); }
-
+  .sg-status.partial { color: var(--yellow); }
   .site-group-cards {
     display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 14px;
   }
@@ -151,9 +147,8 @@
     background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
     overflow: hidden; transition: all 0.25s; position: relative; animation: cardIn 0.35s ease both;
   }
-  @keyframes cardIn { from { opacity: 0; transform: translateY(10px) scale(0.97); } to { opacity: 1; transform: translateY(0) scale(1); } }
+  @keyframes cardIn { from { opacity: 0; transform: translateY(10px) scale(0.97); } to { opacity: 1; transform: scale(1); } }
   .card:hover { border-color: var(--border-hover); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.3); }
-
   .card-select {
     position: absolute; top: 10px; left: 10px; z-index: 3; width: 22px; height: 22px;
     border-radius: 6px; border: 2px solid var(--border-hover); background: var(--surface);
@@ -163,7 +158,6 @@
   .card:hover .card-select, .card-select.checked { opacity: 1; }
   .card-select.checked { background: var(--accent); border-color: var(--accent); }
   .card-select.checked::after { content: '✓'; color: #0c0c0f; font-size: 12px; font-weight: 700; }
-
   .card-img-wrap {
     height: 150px; display: flex; align-items: center; justify-content: center; padding: 16px;
     background: repeating-conic-gradient(var(--bg) 0% 25%, var(--surface-2) 0% 50%) 50% / 16px 16px;
@@ -171,7 +165,6 @@
   }
   .card-img-wrap img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 4px; }
   .card-img-wrap .img-error { color: var(--red); font-size: 12px; text-align: center; }
-
   .source-badge {
     position: absolute; top: 10px; right: 10px; font-size: 9px; font-weight: 700;
     text-transform: uppercase; letter-spacing: 0.5px; padding: 3px 8px; border-radius: 4px;
@@ -180,16 +173,15 @@
   .badge-logo { color: var(--accent); }
   .badge-favicon { color: var(--blue); }
   .badge-screenshot { color: var(--yellow); }
-
+  .badge-og { color: #c084fc; }
   .card-info { padding: 10px 14px; border-top: 1px solid var(--border); }
   .card-filename {
-    font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 600; color: var(--text);
+    font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 600;
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 2px;
   }
   .card-meta {
     font-size: 10px; color: var(--text-dim); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   }
-
   .card-actions { display: flex; padding: 0 14px 10px; gap: 6px; }
   .card-btn {
     flex: 1; font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 600; padding: 7px 0;
@@ -207,12 +199,10 @@
   .modal-overlay.open { display: flex; }
   .modal-overlay img { max-width: 90%; max-height: 90%; object-fit: contain; border-radius: var(--radius); cursor: default; }
 
-  /* Empty state */
   .empty-state { text-align: center; padding: 80px 20px; }
   .empty-state svg { margin-bottom: 20px; opacity: 0.15; }
   .empty-state p { color: var(--text-dim); font-size: 14px; max-width: 400px; margin: 0 auto; line-height: 1.7; }
 
-  /* Toast */
   .toast {
     position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(80px);
     background: var(--surface-2); border: 1px solid var(--border); color: var(--text);
@@ -226,7 +216,6 @@
     border-radius: 50%; animation: spin 0.7s linear infinite;
   }
   @keyframes spin { to { transform: rotate(360deg); } }
-
   .hidden { display: none !important; }
 
   @media (max-width: 640px) {
@@ -245,10 +234,9 @@
       <svg viewBox="0 0 36 36" fill="none"><rect width="36" height="36" rx="8" fill="#22d67a" fill-opacity="0.12"/><path d="M10 20l4-8 4 6 3-3 5 7H10z" fill="#22d67a" opacity="0.6"/><circle cx="24" cy="13" r="3" fill="#22d67a"/></svg>
       <span>GrabLogo</span>
     </div>
-    <p class="tagline">Scan any site and grab its logo, favicon & screenshot — single or bulk.</p>
+    <p class="tagline">Scan any site's DOM and grab its logo, favicon & screenshot — single or bulk.</p>
   </div>
 
-  <!-- Input -->
   <div class="input-section">
     <div class="tabs">
       <button class="tab active" data-mode="single" onclick="switchMode('single')">Single</button>
@@ -275,9 +263,9 @@
     </div>
   </div>
 
+  <div class="proxy-status" id="proxyStatus"></div>
   <div class="loading-bar" id="loadingBar"></div>
 
-  <!-- Actions -->
   <div class="actions-bar hidden" id="actionsBar">
     <div class="result-count" id="resultCount"></div>
     <div class="actions-right">
@@ -290,46 +278,112 @@
     </div>
   </div>
 
-  <!-- Results -->
   <div id="resultsArea">
     <div class="empty-state" id="emptyState">
       <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-      <p>Enter a website URL and we'll scan its HTML to find the logo, grab the favicon, and take a desktop screenshot.</p>
+      <p>Enter a website URL and we'll scan its HTML to extract the logo image, grab the favicon, and take a 1280×800 desktop screenshot.</p>
     </div>
     <div id="resultsContainer" class="hidden"></div>
   </div>
 </div>
 
-<!-- Preview Modal -->
 <div class="modal-overlay" id="previewModal" onclick="closePreview()">
   <img id="previewImg" src="" alt="Preview">
 </div>
-
 <div class="toast" id="toast"></div>
 
 <script>
 let currentMode = 'single';
 let results = [];
 let allSelected = false;
+let workingProxy = null; // Cache the first working proxy
 
-// ─── CORS Proxies (chained fallback) ───
+// ─── CORS Proxy Chain ───
+// Updated Feb 2025: allorigins.win is DEAD, corsproxy.io blocks India & disabled HTML
+// These are tested & working alternatives:
 const CORS_PROXIES = [
-  url => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
-  url => `https://corsproxy.io/?${encodeURIComponent(url)}`,
-  url => `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`,
+  {
+    name: 'api.codetabs.com',
+    build: url => `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`,
+  },
+  {
+    name: 'corsproxy.io',
+    build: url => `https://corsproxy.io/?url=${encodeURIComponent(url)}`,
+  },
+  {
+    name: 'api.allorigins.win',
+    build: url => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
+  },
+  {
+    name: 'everyorigin (JSON)',
+    build: url => `https://everyorigin.jwvbremen.nl/api/get?url=${encodeURIComponent(url)}`,
+    isJson: true, // returns { html: "..." }
+  },
+  {
+    name: 'nordicapis thingproxy',
+    build: url => `https://thingproxy.freeboard.io/fetch/${url}`,
+  },
 ];
 
 async function fetchWithProxy(url) {
+  const statusEl = document.getElementById('proxyStatus');
+
+  // If we already know a working proxy, try it first
+  if (workingProxy) {
+    try {
+      statusEl.innerHTML = `Trying <span class="proxy-ok">${workingProxy.name}</span> (cached)...`;
+      const text = await tryProxy(workingProxy, url);
+      if (text) {
+        statusEl.innerHTML = `Connected via <span class="proxy-ok">${workingProxy.name}</span> ✓`;
+        return text;
+      }
+    } catch {}
+    workingProxy = null; // Invalidate if it failed
+  }
+
+  // Try all proxies in order
   for (const proxy of CORS_PROXIES) {
     try {
-      const resp = await fetch(proxy(url), { signal: AbortSignal.timeout(12000) });
-      if (resp.ok) {
-        const text = await resp.text();
-        if (text && text.length > 200) return text;
+      statusEl.innerHTML = `Trying <span style="color:var(--yellow)">${proxy.name}</span>...`;
+      const text = await tryProxy(proxy, url);
+      if (text) {
+        workingProxy = proxy; // Cache it
+        statusEl.innerHTML = `Connected via <span class="proxy-ok">${proxy.name}</span> ✓`;
+        return text;
       }
-    } catch (e) { /* try next proxy */ }
+    } catch {}
   }
+
+  statusEl.innerHTML = `<span class="proxy-fail">All proxies failed</span> — try again later or check your network`;
   return null;
+}
+
+async function tryProxy(proxy, url) {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 15000);
+
+  try {
+    const resp = await fetch(proxy.build(url), { signal: controller.signal });
+    clearTimeout(timeout);
+
+    if (!resp.ok) return null;
+
+    if (proxy.isJson) {
+      const json = await resp.json();
+      const html = json.html || json.contents || json.content || '';
+      return html.length > 200 ? html : null;
+    }
+
+    const text = await resp.text();
+    // Validate it's actually HTML (not an error page)
+    if (text.length > 200 && (text.includes('<') || text.includes('html'))) {
+      return text;
+    }
+    return null;
+  } catch {
+    clearTimeout(timeout);
+    return null;
+  }
 }
 
 // ─── DOM Scanner: Extract logos from HTML ───
@@ -340,101 +394,122 @@ function extractLogosFromHTML(html, baseUrl) {
   const found = [];
 
   function resolveUrl(src) {
-    if (!src || src.startsWith('data:')) return null;
+    if (!src || src.startsWith('data:') || src.startsWith('blob:')) return null;
+    src = src.trim();
     try {
       if (src.startsWith('//')) return base.protocol + src;
       if (src.startsWith('/')) return base.origin + src;
-      if (src.startsWith('http')) return src;
+      if (/^https?:\/\//i.test(src)) return src;
       return new URL(src, baseUrl).href;
     } catch { return null; }
   }
 
-  function isLogoSignal(el) {
-    const check = [
-      el.getAttribute('class') || '',
-      el.getAttribute('id') || '',
-      el.getAttribute('alt') || '',
-      el.getAttribute('title') || '',
-      el.getAttribute('src') || '',
-      el.getAttribute('data-src') || '',
-      el.getAttribute('aria-label') || '',
-    ].join(' ').toLowerCase();
-    return /logo/i.test(check);
+  function hasLogoSignal(el) {
+    // Check class, id, alt, title, src, data-src — if any contains "logo"
+    const attrs = ['class', 'id', 'alt', 'title', 'src', 'data-src', 'data-lazy-src', 'aria-label'];
+    const combined = attrs.map(a => el.getAttribute(a) || '').join(' ').toLowerCase();
+    return /logo/i.test(combined);
   }
 
-  function isSVGLogo(el) {
-    const check = [
-      el.getAttribute('class') || '',
-      el.getAttribute('id') || '',
-      el.getAttribute('aria-label') || '',
-      el.closest('[class*="logo"], [id*="logo"]') ? 'logo' : '',
-    ].join(' ').toLowerCase();
-    return /logo/i.test(check);
+  function getImgSrc(img) {
+    // Try multiple src attributes (lazy loading patterns)
+    return resolveUrl(
+      img.getAttribute('src') ||
+      img.getAttribute('data-src') ||
+      img.getAttribute('data-lazy-src') ||
+      img.getAttribute('data-original') ||
+      (img.getAttribute('srcset') || '').split(',')[0]?.trim()?.split(' ')[0] ||
+      ''
+    );
   }
 
-  // ── Priority 1: <img> with logo in class/id/alt/src ──
+  // Also check parent elements for logo signals
+  function parentHasLogoSignal(el) {
+    let parent = el.parentElement;
+    for (let i = 0; i < 3 && parent; i++) {
+      const cls = (parent.getAttribute('class') || '').toLowerCase();
+      const id = (parent.getAttribute('id') || '').toLowerCase();
+      if (/logo/i.test(cls + ' ' + id)) return true;
+      parent = parent.parentElement;
+    }
+    return false;
+  }
+
+  // ── 1. <img> with "logo" in class/id/alt/src or parent has logo class ──
   doc.querySelectorAll('img').forEach(img => {
-    if (isLogoSignal(img)) {
-      const src = resolveUrl(img.getAttribute('src') || img.getAttribute('data-src') || img.getAttribute('data-lazy-src') || img.getAttribute('srcset')?.split(',')[0]?.trim()?.split(' ')[0]);
-      if (src) found.push({ src, score: 100, reason: 'img with logo signal' });
+    if (hasLogoSignal(img) || parentHasLogoSignal(img)) {
+      const src = getImgSrc(img);
+      if (src) found.push({ src, score: 100, reason: 'Logo image detected' });
     }
   });
 
-  // ── Priority 2: <img> inside <header> or <nav> (first image) ──
+  // ── 2. <img> inside <header>, <nav>, [role="banner"] ──
   doc.querySelectorAll('header img, nav img, [role="banner"] img').forEach((img, i) => {
-    if (i > 2) return; // only first few
-    const src = resolveUrl(img.getAttribute('src') || img.getAttribute('data-src'));
-    if (src) found.push({ src, score: 80 - i * 5, reason: 'img inside header/nav' });
+    if (i > 2) return;
+    const src = getImgSrc(img);
+    if (src) found.push({ src, score: 80 - i * 5, reason: 'Header/nav image' });
   });
 
-  // ── Priority 3: <a> linking to homepage containing <img> ──
-  doc.querySelectorAll('a[href="/"] img, a[href="' + baseUrl + '"] img, a[href="' + base.origin + '"] img, a[href="' + base.origin + '/"] img').forEach((img, i) => {
-    if (i > 1) return;
-    const src = resolveUrl(img.getAttribute('src') || img.getAttribute('data-src'));
-    if (src) found.push({ src, score: 75 - i * 5, reason: 'img in homepage link' });
+  // ── 3. <a href="/"> or <a href="homepage"> containing <img> ──
+  const homeSelectors = [
+    'a[href="/"] img',
+    'a[href="' + base.origin + '"] img',
+    'a[href="' + base.origin + '/"] img',
+    'a[href="' + baseUrl + '"] img',
+  ];
+  homeSelectors.forEach(sel => {
+    try {
+      doc.querySelectorAll(sel).forEach((img, i) => {
+        if (i > 1) return;
+        const src = getImgSrc(img);
+        if (src) found.push({ src, score: 75 - i * 5, reason: 'Homepage link image' });
+      });
+    } catch {}
   });
 
-  // ── Priority 4: <svg> with logo class/id ──
-  doc.querySelectorAll('svg').forEach(svg => {
-    if (isSVGLogo(svg)) {
-      // We can't easily extract SVG as image URL, but we note it
-      found.push({ src: null, score: 60, reason: 'SVG logo (inline)', isSvg: true, svgEl: svg });
+  // ── 4. <img> where URL contains "logo" ──
+  doc.querySelectorAll('img').forEach(img => {
+    const rawSrc = (img.getAttribute('src') || img.getAttribute('data-src') || '').toLowerCase();
+    if (/logo/i.test(rawSrc) && !hasLogoSignal(img)) { // avoid double-counting
+      const src = getImgSrc(img);
+      if (src) found.push({ src, score: 70, reason: 'URL contains "logo"' });
     }
   });
 
-  // ── Priority 5: <link> with logo/icon in href ──
+  // ── 5. Large <link> icons (apple-touch-icon, 192px+) ──
   doc.querySelectorAll('link[rel*="icon"], link[rel*="apple-touch"], link[rel*="shortcut"]').forEach(link => {
     const src = resolveUrl(link.getAttribute('href'));
     const sizes = link.getAttribute('sizes') || '';
     const sizeVal = parseInt(sizes) || 0;
-    if (src) found.push({ src, score: 40 + Math.min(sizeVal / 10, 20), reason: `link icon ${sizes}` });
+    if (src) found.push({ src, score: 40 + Math.min(sizeVal / 5, 25), reason: `Icon ${sizes || 'default'}` });
   });
 
-  // ── Priority 6: og:image ──
+  // ── 6. og:image ──
   const ogImage = doc.querySelector('meta[property="og:image"]')?.getAttribute('content');
   if (ogImage) {
     const src = resolveUrl(ogImage);
-    if (src) found.push({ src, score: 35, reason: 'og:image' });
+    if (src) found.push({ src, score: 55, reason: 'og:image' });
   }
 
-  // ── Priority 7: twitter:image ──
-  const twImage = doc.querySelector('meta[name="twitter:image"]')?.getAttribute('content') ||
-                  doc.querySelector('meta[property="twitter:image"]')?.getAttribute('content');
+  // ── 7. twitter:image ──
+  const twImage = doc.querySelector('meta[name="twitter:image"], meta[property="twitter:image"]')?.getAttribute('content');
   if (twImage) {
     const src = resolveUrl(twImage);
-    if (src) found.push({ src, score: 30, reason: 'twitter:image' });
+    if (src) found.push({ src, score: 50, reason: 'twitter:image' });
   }
 
-  // Deduplicate by src & sort by score
+  // Deduplicate & sort
   const seen = new Set();
   const unique = [];
   for (const item of found.sort((a, b) => b.score - a.score)) {
     if (!item.src || seen.has(item.src)) continue;
+    // Skip tracking pixels / tiny icons typically named pixel/track/blank
+    if (/pixel|track|blank|spacer|1x1/i.test(item.src)) continue;
     seen.add(item.src);
     unique.push(item);
   }
 
-  return unique.slice(0, 5); // top 5 logo candidates
+  return unique.slice(0, 5);
 }
 
 // ─── Helpers ───
@@ -466,13 +541,12 @@ function genName(domain, type) {
   return `${domain.replace(/[^a-z0-9]/gi, '-')}-${type}`;
 }
 
-// ─── Main: Grab Logos ───
+// ─── Main Flow ───
 async function grabLogos() {
   const rawUrls = parseUrls();
   if (!rawUrls.length) { showToast('Enter at least one URL'); return; }
-
   const urls = rawUrls.map(normalizeUrl).filter(Boolean);
-  if (!urls.length) { showToast('No valid URLs found'); return; }
+  if (!urls.length) { showToast('No valid URLs'); return; }
 
   document.getElementById('loadingBar').classList.add('active');
   document.getElementById('emptyState').classList.add('hidden');
@@ -494,7 +568,7 @@ async function grabLogos() {
       <div class="site-group-header">
         <img class="sg-favicon" src="https://www.google.com/s2/favicons?domain=${domain}&sz=32" onerror="this.style.display='none'" alt="">
         <span class="sg-domain">${escHtml(domain)}</span>
-        <span class="sg-status scanning" id="status-${i}">⏳ Scanning DOM...</span>
+        <span class="sg-status scanning" id="status-${i}">⏳ Scanning...</span>
       </div>
       <div class="site-group-cards" id="cards-${i}"></div>
     `;
@@ -504,66 +578,86 @@ async function grabLogos() {
     const statusEl = document.getElementById(`status-${i}`);
 
     try {
-      // Step 1: Fetch HTML via CORS proxy
-      statusEl.textContent = '⏳ Fetching HTML...';
+      // Fetch HTML
+      statusEl.textContent = '⏳ Fetching HTML via proxy...';
       const html = await fetchWithProxy(url);
 
-      if (!html) {
-        statusEl.textContent = '⚠ Could not fetch site (proxies blocked)';
-        statusEl.className = 'sg-status error';
-        // Still add favicon + screenshot
-        addCard(cardsEl, domain, {
-          src: `https://icons.duckduckgo.com/ip3/${domain}.ico`,
-          name: genName(domain, 'favicon'), label: 'Favicon', badge: 'FAVICON', badgeClass: 'badge-favicon',
-        });
-        addCard(cardsEl, domain, {
-          src: `https://image.thum.io/get/width/1280/crop/800/${url}`,
-          name: genName(domain, 'screenshot-1280x800'), label: 'Screenshot 1280×800', badge: 'SCREENSHOT', badgeClass: 'badge-screenshot',
-        });
-        updateCount();
-        continue;
-      }
+      let logoCount = 0;
 
-      // Step 2: Parse & extract logos
-      statusEl.textContent = '🔍 Scanning for logos...';
-      const logos = extractLogosFromHTML(html, url);
+      if (html) {
+        // Parse & extract logos
+        statusEl.textContent = '🔍 Scanning DOM for logos...';
+        const logos = extractLogosFromHTML(html, url);
+        logoCount = logos.length;
 
-      if (logos.length > 0) {
-        // Add top logo candidates (max 3)
-        logos.slice(0, 3).forEach((logo, idx) => {
+        if (logos.length > 0) {
+          // Best logo
           addCard(cardsEl, domain, {
-            src: logo.src,
-            name: genName(domain, idx === 0 ? 'logo' : `logo-${idx + 1}`),
-            label: idx === 0 ? `Logo — ${logo.reason}` : `Logo alt ${idx + 1} — ${logo.reason}`,
-            badge: idx === 0 ? 'LOGO' : `LOGO ${idx + 1}`,
-            badgeClass: 'badge-logo',
+            src: logos[0].src,
+            name: genName(domain, 'logo'),
+            label: `Logo — ${logos[0].reason}`,
+            badge: 'LOGO', badgeClass: 'badge-logo',
           });
-        });
-        statusEl.textContent = `✓ Found ${logos.length} logo(s)`;
-        statusEl.className = 'sg-status done';
-      } else {
-        statusEl.textContent = '⚠ No logos found in DOM';
-        statusEl.className = 'sg-status error';
+
+          // Additional logo candidates (if any)
+          logos.slice(1, 3).forEach((logo, idx) => {
+            addCard(cardsEl, domain, {
+              src: logo.src,
+              name: genName(domain, `logo-alt-${idx + 2}`),
+              label: `Alt ${idx + 2} — ${logo.reason}`,
+              badge: `LOGO ${idx + 2}`, badgeClass: 'badge-logo',
+            });
+          });
+        }
       }
 
-      // Step 3: Always add favicon
+      // Always add favicon (DuckDuckGo — reliable, no CORS issues for display)
       addCard(cardsEl, domain, {
         src: `https://icons.duckduckgo.com/ip3/${domain}.ico`,
-        name: genName(domain, 'favicon'), label: 'Favicon', badge: 'FAVICON', badgeClass: 'badge-favicon',
+        name: genName(domain, 'favicon'),
+        label: 'Favicon', badge: 'FAVICON', badgeClass: 'badge-favicon',
       });
 
-      // Step 4: Always add screenshot (1280x800)
+      // Always add desktop screenshot (1280x800)
       addCard(cardsEl, domain, {
         src: `https://image.thum.io/get/width/1280/crop/800/${url}`,
-        name: genName(domain, 'screenshot-1280x800'), label: 'Screenshot 1280×800', badge: 'SCREENSHOT', badgeClass: 'badge-screenshot',
+        name: genName(domain, 'screenshot-1280x800'),
+        label: 'Desktop Screenshot 1280×800', badge: 'SCREENSHOT', badgeClass: 'badge-screenshot',
       });
+
+      // Status
+      if (!html) {
+        statusEl.textContent = '⚠ Proxy failed — favicon & screenshot only';
+        statusEl.className = 'sg-status partial';
+      } else if (logoCount > 0) {
+        statusEl.textContent = `✓ Found ${logoCount} logo(s) + favicon + screenshot`;
+        statusEl.className = 'sg-status done';
+      } else {
+        statusEl.textContent = '⚠ No logos in DOM — favicon & screenshot added';
+        statusEl.className = 'sg-status partial';
+      }
 
       updateCount();
 
     } catch (err) {
       statusEl.textContent = `✗ Error: ${err.message}`;
       statusEl.className = 'sg-status error';
+      // Still try favicon + screenshot
+      addCard(cardsEl, domain, {
+        src: `https://icons.duckduckgo.com/ip3/${domain}.ico`,
+        name: genName(domain, 'favicon'),
+        label: 'Favicon', badge: 'FAVICON', badgeClass: 'badge-favicon',
+      });
+      addCard(cardsEl, domain, {
+        src: `https://image.thum.io/get/width/1280/crop/800/${url}`,
+        name: genName(domain, 'screenshot-1280x800'),
+        label: 'Desktop Screenshot 1280×800', badge: 'SCREENSHOT', badgeClass: 'badge-screenshot',
+      });
+      updateCount();
     }
+
+    // Small delay between sites to not hammer proxies
+    if (i < urls.length - 1) await sleep(500);
   }
 
   document.getElementById('loadingBar').classList.remove('active');
@@ -571,7 +665,7 @@ async function grabLogos() {
   updateCount();
 }
 
-// ─── Add a card to a site group ───
+// ─── Card Management ───
 function addCard(container, domain, opts) {
   const id = results.length;
   results.push({ ...opts, domain, selected: false, id, failed: false });
@@ -583,9 +677,7 @@ function addCard(container, domain, opts) {
   card.innerHTML = `
     <div class="card-select" onclick="toggleSelect(${id}, event)" id="sel-${id}"></div>
     <div class="source-badge ${opts.badgeClass || ''}">${escHtml(opts.badge)}</div>
-    <div class="card-img-wrap">
-      <div class="card-spinner"></div>
-    </div>
+    <div class="card-img-wrap"><div class="card-spinner"></div></div>
     <div class="card-info">
       <div class="card-filename" title="${escHtml(opts.name)}">${escHtml(opts.name)}</div>
       <div class="card-meta">${escHtml(opts.label)}</div>
@@ -603,11 +695,9 @@ function loadCardImage(id, src) {
   const card = document.getElementById(`card-${id}`);
   const wrap = card.querySelector('.card-img-wrap');
   const img = new Image();
-  // No crossOrigin — display works fine without it
   img.onload = () => {
-    // Check if it's a tiny placeholder (1x1 pixel trackers etc)
     if (img.naturalWidth <= 2 && img.naturalHeight <= 2) {
-      wrap.innerHTML = '<span class="img-error">⚠ Tiny image (tracker)</span>';
+      wrap.innerHTML = '<span class="img-error">⚠ Tracking pixel</span>';
       results[id].failed = true;
       updateCount();
       return;
@@ -656,66 +746,60 @@ function updateCount() {
 // ─── Downloads ───
 async function downloadSingle(id) {
   const r = results[id];
-  if (r.failed) { showToast('Cannot download failed image'); return; }
-
+  if (r.failed) { showToast('Cannot download'); return; }
   showToast('Downloading...');
   const ok = await downloadViaFetch(r.src, r.name);
-  if (ok) { showToast('Downloaded!'); }
-  else {
-    window.open(r.src, '_blank');
-    showToast('Opened in new tab — right-click to save');
-  }
+  if (ok) showToast('Downloaded!');
+  else { window.open(r.src, '_blank'); showToast('Opened in new tab — right-click to save'); }
 }
 
 async function downloadViaFetch(url, filename) {
+  // Try direct fetch
   try {
-    // Try direct fetch first
     let resp = await fetch(url, { signal: AbortSignal.timeout(10000) });
-
-    // If CORS blocked, try via proxy
-    if (!resp.ok) {
-      for (const proxy of CORS_PROXIES) {
-        try {
-          resp = await fetch(proxy(url), { signal: AbortSignal.timeout(10000) });
-          if (resp.ok) break;
-        } catch {}
-      }
+    if (resp.ok) {
+      const blob = await resp.blob();
+      if (blob.size > 50) return triggerBlobDownload(blob, filename, url);
     }
+  } catch {}
 
-    if (!resp.ok) return false;
-    const blob = await resp.blob();
-    if (blob.size < 50) return false;
-    const ext = getExt(blob.type, url);
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = `${filename}.${ext}`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(a.href);
-    return true;
-  } catch {
-    return false;
+  // Try via proxy
+  for (const proxy of CORS_PROXIES) {
+    try {
+      const resp = await fetch(proxy.build(url), { signal: AbortSignal.timeout(10000) });
+      if (resp.ok) {
+        const blob = await resp.blob();
+        if (blob.size > 50) return triggerBlobDownload(blob, filename, url);
+      }
+    } catch {}
   }
+  return false;
+}
+
+function triggerBlobDownload(blob, filename, url) {
+  const ext = getExt(blob.type, url);
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `${filename}.${ext}`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(a.href);
+  return true;
 }
 
 async function downloadSelected() {
   const sel = results.filter(r => r.selected && !r.failed);
   if (!sel.length) { showToast('No images selected'); return; }
-
   showToast(`Downloading ${sel.length} image(s)...`);
   let ok = 0, fallback = 0;
-
   for (const r of sel) {
     const success = await downloadViaFetch(r.src, r.name);
     if (success) ok++;
     else { window.open(r.src, '_blank'); fallback++; }
     await sleep(400);
   }
-
-  showToast(fallback > 0
-    ? `${ok} downloaded · ${fallback} opened in tabs`
-    : `${ok} image(s) downloaded!`);
+  showToast(fallback > 0 ? `${ok} downloaded · ${fallback} opened in tabs` : `${ok} downloaded!`);
 }
 
 function getExt(mime, url) {
@@ -725,8 +809,7 @@ function getExt(mime, url) {
   if (mime.includes('webp')) return 'webp';
   if (mime.includes('jpeg') || mime.includes('jpg')) return 'jpg';
   if (mime.includes('icon')) return 'ico';
-  // Guess from URL
-  const m = url.match(/\.(png|jpg|jpeg|gif|svg|webp|ico)(\?|$)/i);
+  const m = (url || '').match(/\.(png|jpg|jpeg|gif|svg|webp|ico)(\?|$)/i);
   if (m) return m[1].toLowerCase();
   return 'png';
 }
@@ -736,24 +819,20 @@ function copyUrl(id) {
 }
 
 function clearAll() {
-  results = [];
-  allSelected = false;
+  results = []; allSelected = false;
   document.getElementById('resultsContainer').innerHTML = '';
   document.getElementById('resultsContainer').classList.add('hidden');
   document.getElementById('actionsBar').classList.add('hidden');
   document.getElementById('emptyState').classList.remove('hidden');
   document.getElementById('selectAllBtn').textContent = 'Select All';
+  document.getElementById('proxyStatus').innerHTML = '';
 }
 
-// ─── UI Helpers ───
 function previewImage(src) {
   document.getElementById('previewImg').src = src;
   document.getElementById('previewModal').classList.add('open');
 }
-
-function closePreview() {
-  document.getElementById('previewModal').classList.remove('open');
-}
+function closePreview() { document.getElementById('previewModal').classList.remove('open'); }
 
 function showToast(msg) {
   const t = document.getElementById('toast');
